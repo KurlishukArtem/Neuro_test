@@ -10,11 +10,15 @@ namespace NeuroProject
     {
         public int InputCount { get; }
         public int OutputCount { get; }
+        public double LearningRate { get; }
         public List<int> HiddenLayers { get; }
-        public Topoligy(int inputCount, int outputCount, params int[] layers)
+
+        // ctor - для автоматического написания конструкора (вери удобно)
+        public Topoligy(int inputCount, int outputCount, double learningRate, params int[] layers)
         {
             InputCount = inputCount;
             OutputCount = outputCount;
+            LearningRate = learningRate;
             HiddenLayers = new List<int>();
             HiddenLayers.AddRange(layers);
         }

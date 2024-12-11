@@ -32,8 +32,14 @@ namespace NeuroProject
             //здесь закидываем значения
             for (int i = 0; i < inputCount; i++)
             {
-                Weights.Add(rnd.NextDouble());
+                if (NeuronType == NeuronType.Input)
+                {
+                    Weights.Add(1);
+                }
+                else
+                    Weights.Add(rnd.NextDouble());
                 Inputs.Add(0);
+
             }
         }
 
@@ -78,14 +84,7 @@ namespace NeuroProject
             return result;
         }
 
-        public void SetWights(params double[] weights)
-        {
-            //на удаление после подключения нормальной версии
-            for (int i = 0; i < weights.Length; i++)
-            {
-                Weights[i] = weights[i];
-            }
-        }
+        
 
         //выполнение изменения коэфициентов/изменение нейрона
         public void Learn(double error, double learningRate)
