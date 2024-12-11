@@ -52,7 +52,7 @@ namespace NeuroProject
             for (int i = 0; i < weights.Length; i++)
             {
                 Weights[i] = weights[i];
-            }
+            }  
         }
     }
 }
