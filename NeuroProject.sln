@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.12.35506.116 d17.12
+VisualStudioVersion = 17.12.35506.116
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NeuroProject", "NeuroProject\NeuroProject.csproj", "{2482B4BA-D499-4FCD-A457-1393B3EE8141}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NeuroProjectTests1", "NeuroProjectTests1\NeuroProjectTests1.csproj", "{BC1C5B73-E5BB-439F-959A-DADBDC9F586D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{2482B4BA-D499-4FCD-A457-1393B3EE8141}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2482B4BA-D499-4FCD-A457-1393B3EE8141}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2482B4BA-D499-4FCD-A457-1393B3EE8141}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BC1C5B73-E5BB-439F-959A-DADBDC9F586D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BC1C5B73-E5BB-439F-959A-DADBDC9F586D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BC1C5B73-E5BB-439F-959A-DADBDC9F586D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BC1C5B73-E5BB-439F-959A-DADBDC9F586D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

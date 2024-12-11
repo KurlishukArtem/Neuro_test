@@ -96,7 +96,7 @@ namespace NeuroProject
         }
 
         
-        private void CreateInputLayer()
+        public void CreateInputLayer()
         {
             var inputNeurons = new List<Neuron>();
             for (int i = 0; i < Topoligy.InputCount; i++)
