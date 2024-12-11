@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting;
+using System.Runtime.Serialization.Formatters;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -8,29 +10,49 @@ namespace NeuroProject
 {
     public class Neuron
     {
+        //тут объявляем переменные
         public List<double> Weights { get; }
+        public List<double> Inputs { get; }
         public NeuronType NeuronType { get; }
         public double Output { get; private set; }
+        public double Delta { get; private set; }
 
         public Neuron(int inputCount, NeuronType type = NeuronType.Normal)
         {
             NeuronType = type;
             Weights = new List<double>();
+            Inputs = new List<double>();
 
-            for (int i = 0; i < inputCount; i++) 
+            InitWeightRandomValue(inputCount);
+        }
+
+        private void InitWeightRandomValue(int inputCount)
+        {
+            var rnd = new Random();
+            //здесь закидываем значения
+            for (int i = 0; i < inputCount; i++)
             {
-                Weights.Add(1);
+                Weights.Add(rnd.NextDouble());
+                Inputs.Add(0);
             }
         }
 
+        //сюда попадают все input'ы
         public double FeedForward(List<double> inputs)
         {
+            //прогоняеем все инпуты и ничего с ними не делаем
+            for (int i = 0; i < inputs.Count; i++)
+            {
+                Inputs[i] = inputs[i];
+            }
+
             var sum = 0.0;
             for (int i = 0; i < inputs.Count; i++)
             {
                 sum+= inputs[i] * Weights[i];
 
             }
+            //если тип нейрона != входящему типу, то считаем сигмойду в ином случае - выводим сумму
             if (NeuronType != NeuronType.Input)
             {
                 Output = Sigmoid(sum);
@@ -41,15 +63,19 @@ namespace NeuroProject
             }
             return Output;
         }
+        // Метод с формулой сигмойды
         private double Sigmoid(double x)
         {
             var result = 1.0 / (1.0 + Math.Pow(Math.E, -x));
             return result;
         }
 
-        public override string ToString()
+        //производную от функции сигмойды
+        private double SigmoidDx(double x)
         {
-            return Output.ToString();
+            var sigmoid = Sigmoid(x);
+            var result = sigmoid / (1 - sigmoid);
+            return result;
         }
 
         public void SetWights(params double[] weights)
@@ -58,7 +84,35 @@ namespace NeuroProject
             for (int i = 0; i < weights.Length; i++)
             {
                 Weights[i] = weights[i];
-            }  
+            }
+        }
+
+        //выполнение изменения коэфициентов/изменение нейрона
+        public void Learn(double error, double learningRate)
+        {
+            if (NeuronType == NeuronType.Input)
+            {
+                return;
+            }
+
+            var delta = error * SigmoidDx(Output);
+
+            for (int i = 0; i < Weights.Count; i++)
+            {
+                var weight = Weights[i];
+                var input = Inputs[i];
+
+                var newWeight = weight - input * delta * learningRate;
+                Weights[i] = newWeight;
+            }
+
+            Delta = delta;
+        }
+
+        //перезаписываем выходные данные
+        public override string ToString()
+        {
+            return Output.ToString();
         }
     }
 }
