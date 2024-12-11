@@ -76,7 +76,7 @@ namespace NeuroProject
             return result;
         }
 
-        //производную от функции сигмойды
+        //производная от функции сигмойды
         private double SigmoidDx(double x)
         {
             var sigmoid = Sigmoid(x);
@@ -89,13 +89,16 @@ namespace NeuroProject
         //выполнение изменения коэфициентов/изменение нейрона
         public void Learn(double error, double learningRate)
         {
+            // если тип входных данных совпадает с NeuronType => возвращаем значение
             if (NeuronType == NeuronType.Input)
             {
                 return;
             }
 
+            // формула дельты
             var delta = error * SigmoidDx(Output);
 
+            // прогоняет значения до условного значения "Веса" по i - как единица общего списка
             for (int i = 0; i < Weights.Count; i++)
             {
                 var weight = Weights[i];

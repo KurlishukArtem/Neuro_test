@@ -8,8 +8,8 @@ namespace NeuroProject
 {
     public enum NeuronType
     {
-        Input = 0, 
-        Normal = 1,
-        Output = 2
+        Input = 0, //входящие значения
+        Normal = 1, // значения процесса (скрытый слой)
+        Output = 2 // выходные данные
     }
 }

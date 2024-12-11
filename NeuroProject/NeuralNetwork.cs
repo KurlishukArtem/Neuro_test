@@ -26,13 +26,16 @@ namespace NeuroProject
             CreateOutoutLayer();
         }
 
-        //принимает входящие сигналы и пушит их
+        //принимает входящие сигналы и пушит их / прогоняет сигналы
         public Neuron FeedForward(params double[] inputSignals)
         {
             //этот метод отсылает сигнал в нейрон
             SendSignalsToInputNeurons(inputSignals);
 
+            //пробегается по всем слоям после пуша значений внутрь
             FeedForwardAllLayersAfterInput();
+
+            // ну тут по хуйне. Если выходное значение Topology = 1, то возвращаем 0й нейрон на последний слой
             if (Topoligy.OutputCount == 1)
             {
                 return Layers.Last().Neurons[0];
@@ -57,8 +60,6 @@ namespace NeuroProject
                 foreach(var data in dataset)
                 {
                     error += Backpropagation(data.Item1, data.Item2);
-                    
-
                 }
             }
             //возвращаем среднюю ошибку
@@ -137,6 +138,8 @@ namespace NeuroProject
             }
         }
 
+
+        // Создаем выходой слой (OutputLayer)
         private void CreateOutoutLayer()
         {
             var outputNeurons = new List<Neuron>();

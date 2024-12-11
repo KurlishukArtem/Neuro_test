@@ -13,7 +13,7 @@ namespace NeuroProject
         public double LearningRate { get; }
         public List<int> HiddenLayers { get; }
 
-        // ctor - для автоматического написания конструкора (вери удобно)
+        // ctor - для автоматического написания конструкора (удобно!)
         public Topoligy(int inputCount, int outputCount, double learningRate, params int[] layers)
         {
             InputCount = inputCount;
